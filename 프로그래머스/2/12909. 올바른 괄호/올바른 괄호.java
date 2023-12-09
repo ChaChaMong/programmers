@@ -4,22 +4,28 @@ import java.util.ArrayList;
 class Solution {
     boolean solution(String s) {
         boolean answer = false;
-
-        List<Character> list = new ArrayList<Character>();
-                        
-        for (int i = 0; i < s.length(); i++) {
-            if (list.size() == 0) {
-                list.add(s.charAt(i));
-            }
-            else if (list.get(list.size() - 1) == '(' && s.charAt(i) == ')') {
-                   list.remove(list.size() - 1);
-            } 
-            else {
-                list.add(s.charAt(i));
-            }
+        int count = 0;
+        
+        if (s.charAt(0) == '(') {
+            count++;
+        } 
+        else {
+            count--;
         }
         
-        if (list.size() == 0) {
+        for (int i = 1; i < s.length(); i++) {
+            if (count < 0) {
+                answer = false;
+                break;
+            }
+            else if (s.charAt(i) == '('){
+                count++;
+            }
+            else if (s.charAt(i) == ')'){
+                count--;
+            }
+        }
+        if (count == 0) {
             answer = true;
         }
         

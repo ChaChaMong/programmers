@@ -5,6 +5,8 @@ class Solution {
         int removeCount;
         
         while(s.length() > 1) {
+            answer[0]++;
+            
             removeCount = 0;
             for (int i = 0; i < s.length(); i++) {
                 if (s.charAt(i) == '0'){
@@ -12,10 +14,13 @@ class Solution {
                 }
             }
 
+            if(s == "1") {
+                break;
+            }
+            
             temp = s.length() - removeCount;            
             s = Integer.toBinaryString(temp);
 
-            answer[0]++;
             answer[1] += removeCount;
         }
 

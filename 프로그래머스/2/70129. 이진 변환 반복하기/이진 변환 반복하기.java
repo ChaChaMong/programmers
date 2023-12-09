@@ -1,25 +1,18 @@
 class Solution {
     public int[] solution(String s) {
         int[] answer = new int[]{0, 0};
-        int loofCount = 0;
+        int temp;
         
-        while(s.length() > 1) {
-            int removeCount = 0;
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) == '0'){
-                   removeCount++;
-                }
-            }
-
-            int length = s.length() - removeCount;            
-            s = Integer.toBinaryString(length);
-
-            answer[0]++;
-            if(s == "1") {
-                break;
-            }
+        while(!s.equals("1")) {
             
-            answer[1] += removeCount;
+            answer[1] += s.length();
+            s = s.replaceAll("0","");
+            temp = s.length();
+            answer[1] -= temp;
+            
+            s = Integer.toBinaryString(temp);
+            
+            answer[0]++;
         }
         
         return answer;

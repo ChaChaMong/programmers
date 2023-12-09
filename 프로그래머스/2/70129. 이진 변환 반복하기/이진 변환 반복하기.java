@@ -16,10 +16,6 @@ class Solution {
             s = Integer.toBinaryString(temp);
 
             answer[0]++;
-            if(s == "1") {
-                break;
-            }
-
             answer[1] += removeCount;
         }
 

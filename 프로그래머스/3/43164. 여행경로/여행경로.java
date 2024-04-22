@@ -9,13 +9,13 @@ class Solution {
         check = new boolean[tickets.length];
 
         dfs(tickets, 0, "ICN", "ICN");
-
+        
         answer = queue.peek().split(" ");
 
         return answer;
     }
 
-    public void dfs(String[][] tickets, int depth, String start, String total){
+    private void dfs(String[][] tickets, int depth, String start, String total){
         if (depth == tickets.length) {
             queue.add(total);
             return;

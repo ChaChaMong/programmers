@@ -1,8 +1,8 @@
 import java.util.*;
 
 class Solution {
-    public Queue<String> queue = new PriorityQueue<>();
-    boolean[] check;
+    private Queue<String> queue = new PriorityQueue<>();
+    private boolean[] check;
 
     public String[] solution(String[][] tickets) {
         String[] answer = {};

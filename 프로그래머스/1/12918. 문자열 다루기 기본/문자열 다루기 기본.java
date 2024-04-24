@@ -9,8 +9,7 @@ class Solution {
         char[] charArray = s.toCharArray();
         Arrays.sort(charArray);
         
-        if ((int)charArray[charArray.length - 1] < 48 ||
-           (int)charArray[charArray.length - 1] > 57) {
+        if ((int)charArray[charArray.length - 1] > 57) {
             return false;
         }
         

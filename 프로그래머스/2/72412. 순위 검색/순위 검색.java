@@ -1,12 +1,13 @@
 import java.util.*;
 
 class Solution {
-    private Map<String, ArrayList<Integer>> mapInfo = new HashMap<String, ArrayList<Integer>>();
+    private static Map<String, ArrayList<Integer>> mapInfo = new HashMap<String, ArrayList<Integer>>();
     
     public int[] solution(String[] info, String[] query) {
-        int[] answer = new int[query.length];
         
         preprocessing(info);
+        
+        int[] answer = new int[query.length];
         
         for (int i = 0; i < query.length; i++) {
             int lastBlankIndex = query[i].lastIndexOf(" ");
@@ -21,6 +22,32 @@ class Solution {
         }
         
         return answer;
+    }
+    
+    private void preprocessing(String[] info) {        
+        for (int i = 0; i < info.length; i++) {
+            String[] condition = info[i].split(" ");
+            getQueryFormat(condition, "", 0);
+        }
+        
+        for (String key : mapInfo.keySet()) {     
+            Collections.sort(mapInfo.get(key));
+        }
+    }
+    
+    private void getQueryFormat(String[] condition, String str, int depth) {
+        if (depth >= 4) {
+            str = str.substring(0, str.lastIndexOf(" and"));
+            if (!mapInfo.containsKey(str)) {
+                ArrayList<Integer> list = new ArrayList<Integer>();
+                mapInfo.put(str, list);
+            }
+            mapInfo.get(str).add(Integer.parseInt(condition[4]));
+            return;
+        }
+        
+        getQueryFormat(condition, str + "- and ", depth + 1);
+        getQueryFormat(condition, str + condition[depth] + " and ", depth + 1);
     }
     
     private int getCount(ArrayList<Integer> list, int number) {
@@ -39,30 +66,4 @@ class Solution {
         
         return list.size() - mid;
     }
-    
-    private void preprocessing(String[] info) {        
-        for (int i = 0; i < info.length; i++) {
-            String[] condition = info[i].split(" ");
-            getQueryFormat(condition, "", 0);
-        }
-        
-        for (String key : mapInfo.keySet()) {     
-            Collections.sort(mapInfo.get(key));
-        }
-    }
-    
-    private void getQueryFormat(String[] condition, String str, int count) {
-        if (count >= 4) {
-            str = str.substring(0, str.lastIndexOf(" and"));
-            if (!mapInfo.containsKey(str)) {
-                ArrayList<Integer> list = new ArrayList<Integer>();
-                mapInfo.put(str, list);
-            }
-            mapInfo.get(str).add(Integer.parseInt(condition[4]));
-            return;
-        }
-        
-        getQueryFormat(condition, str + "- and ", count + 1);
-        getQueryFormat(condition, str + condition[count] + " and ", count + 1);
-    }    
 }

@@ -12,43 +12,35 @@ class Solution {
         for (int i = m - 2; i >= 0; i--) {
             int x = i;
             int y = n - 1;
-                            
-            while(y >= 0 && x <= m - 1) {
-                if (maps[x][y] >= 0) {
-                    if (x + 1 <= m - 1 && maps[x + 1][y] >= 0) {
-                        maps[x][y] += (maps[x + 1][y] % 1_000_000_007);
-                    }
-                    if (y + 1 <= n - 1 && maps[x][y + 1] >= 0) {
-                        maps[x][y] += (maps[x][y + 1] % 1_000_000_007);
-                    }
-                }
-                
-                x++;
-                y--;
-            }
+                       
+            calDiagonal(maps, x, y);
         }
              
         for (int i = n - 2; i >= 0; i--) {
             int x = 0;
             int y = i;
                             
-            while(y >= 0 && x <= m - 1) {
-                if (maps[x][y] >= 0) {
-                    if (x + 1 <= m - 1 && maps[x + 1][y] >= 0) {
-                        maps[x][y] += (maps[x + 1][y] % 1_000_000_007);
-                    }
-                    if (y + 1 <= n - 1 && maps[x][y + 1] >= 0) {
-                        maps[x][y] += (maps[x][y + 1] % 1_000_000_007);
-                    }
-                }
-                
-                x++;
-                y--;
-            }
+            calDiagonal(maps, x, y);
         }
         
         answer = maps[0][0] % 1_000_000_007;
         
         return answer;
+    }
+    
+    private void calDiagonal(int[][] maps, int x, int y) {                       
+        while(x <= maps.length - 1 && y >= 0) {
+            if (maps[x][y] >= 0) {
+                if (x + 1 <= maps.length - 1 && maps[x + 1][y] >= 0) {
+                    maps[x][y] += (maps[x + 1][y] % 1_000_000_007);
+                }
+                if (y + 1 <= maps[0].length - 1 && maps[x][y + 1] >= 0) {
+                    maps[x][y] += (maps[x][y + 1] % 1_000_000_007);
+                }
+            }
+
+            x++;
+            y--;
+        }
     }
 }

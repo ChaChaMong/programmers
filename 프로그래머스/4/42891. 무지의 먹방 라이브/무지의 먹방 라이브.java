@@ -7,8 +7,8 @@ class Solution {
         
         Arrays.sort(sortFood);
         
-        long roof = 0;
-        long roofCount = 0;
+        int roof = 0;
+        int roofCount = 0;
         long count = 0;
         for (int i = 0; i < sortFood.length; i++) {
             for (int j = 0; j < sortFood[i] - roof; j++) {

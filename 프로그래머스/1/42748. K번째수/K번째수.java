@@ -5,14 +5,8 @@ class Solution {
         int[] answer = new int[commands.length];
         
         for (int i = 0; i < commands.length; i++) {
-            int[] temp = new int[commands[i][1] - commands[i][0] + 1];
-            
-            for (int j = commands[i][0] - 1; j < commands[i][1]; j++) {
-                temp[j - (commands[i][0] - 1)] = array[j];
-            }
-            
-            Arrays.sort(temp);
-            
+            int[] temp = Arrays.copyOfRange(array, commands[i][0] - 1, commands[i][1]);                
+            Arrays.sort(temp);            
             answer[i] = temp[commands[i][2] - 1];
         }
         

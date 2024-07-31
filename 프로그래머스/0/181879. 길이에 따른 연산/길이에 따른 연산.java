@@ -7,10 +7,7 @@ class Solution {
         if (num_list.length > 10) {
             answer = Arrays.stream(num_list).sum();
         } else {
-            answer = 1;
-            for (int item : num_list) {
-                answer *= item;
-            }
+            answer = Arrays.stream(num_list).reduce(1, (a, b) -> a * b);
         }
         
         return answer;
